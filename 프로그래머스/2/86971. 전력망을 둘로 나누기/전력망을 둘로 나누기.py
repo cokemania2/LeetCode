@@ -1,9 +1,11 @@
-
 def solution(n, wires):
-    ans = n
-    for sub in (wires[i+1:] + wires[:i] for i in range(len(wires))):
-        s = set(sub[0])
-        [s.update(v) for _ in sub for v in sub if set(v) & s]
-        ans = min(ans, abs(2 * len(s) - n))
-    return ans
+    answer = n
+    for severed_wires in (wires[i+1:] + wires[:i] for i in range(len(wires))):
+        a_group = set(severed_wires[0])
+        [a_group.update(severed_wire) for _ in severed_wires for severed_wire in severed_wires if set(severed_wire) & a_group]
+        answer =  min(answer, abs(2 * len(a_group) - n))
+    return answer
+
+
+
 
