@@ -24,5 +24,5 @@ def solution(book_time):
                     break
             else:
                 room_list.append([time])
-        room_list.sort(key = lambda x: x[-1][1])
+        # room_list.sort(key = lambda x: x[-1][1])
     return len(room_list)
