@@ -1,21 +1,20 @@
 def solution(stones, k):
-
-    min_v = min(stones)
-    max_v = max(stones)
-    while min_v <= max_v:
-        mid_v = min_v + (max_v - min_v) // 2
+    answer = 0
+    
+    min_stone = min(stones)
+    max_stone = max(stones)
+    while min_stone <= max_stone:   
+        mid_stone = (min_stone + max_stone) // 2
         count = 0
-        over = False
-        for i in range(len(stones)):
-            if stones[i] - mid_v <= 0:
+        for stone in stones:
+            if stone <= mid_stone:
                 count += 1
-                if count == k:
-                    over = True
+                if count >= k:
+                    max_stone = mid_stone - 1
                     break
             else:
                 count = 0
-        if over:
-            max_v = mid_v - 1
         else:
-            min_v = mid_v + 1
-    return min_v
+             min_stone = mid_stone + 1
+        
+    return min_stone
