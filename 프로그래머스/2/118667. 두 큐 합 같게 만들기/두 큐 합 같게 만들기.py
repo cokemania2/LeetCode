@@ -1,25 +1,16 @@
 def solution(queue1, queue2):
+    answer = -2
+    
     queue = queue1 + queue2
-    target = sum(queue) // 2
+    half_sum = sum(queue) / 2
     
-    if sum(queue) % 2 != 0:
-        return -1
+    candidates = []
+    for i in range(1, len(queue) + 1):
+        for j in range(len(queue)):
+            if sum(queue[j:j+i]) == half_sum:
+                print(queue[j:j+i], queue[j+i:] + queue[:j])
+                candidates.append(queue[j:j+i])
     
-    n = len(queue1)
-    start, end = 0, n
-    current_sum = sum(queue1)
-    move_count = 0
     
-    while start < 2*n and end < 2*n:
-        if current_sum == target:
-            return move_count
-        elif current_sum < target and end < 2*n:
-            current_sum += queue[end]
-            end += 1
-            move_count += 1
-        else:
-            current_sum -= queue[start]
-            start += 1
-            move_count += 1
     
-    return -1
+    return answer
