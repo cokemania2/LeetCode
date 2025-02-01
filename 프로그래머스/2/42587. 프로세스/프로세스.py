@@ -1,22 +1,17 @@
+from collections import deque
+
 def solution(priorities, location):
-    answer = 0
-    x = priorities[location]
-    priorities[location] = -1
     
+    count = 0
+    x = [1 if i == location else 0 for i in range(len(priorities))]
+    priorities = deque(list(zip(x, priorities)))
     while len(priorities) > 0:
-        flag = False
-        
-
-        v = priorities.pop(0)
-        if v == -1:
-            v = x
-            flag = True
-
-        if len(priorities) > 1 and v < max(priorities + [x]):
-            priorities.append(v if not flag else -1)
+        max_priority = max([v[1] for v in priorities])
+        x = priorities.popleft()
+        if x[1] < max_priority:
+            priorities.append(x)
         else:
-            answer += 1
-            if flag:
-                break
-                
-    return answer
+            count += 1
+            if x[0] == 1:
+                return count
+    return count
