@@ -40,8 +40,7 @@ def is_accessible(location, storage):
         if 0 > ny or ny >= rows or 0 > nx or nx >= cols:
             return True
         if storage[ny][nx] == '0': 
-            if dfs(ny, nx):
-                return True
+            return dfs(ny, nx)
     return False
 
 def get_by_forklift(container_locations, container, storage):
